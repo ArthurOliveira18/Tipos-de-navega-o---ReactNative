@@ -1,20 +1,25 @@
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native"
+
+
 
 import { Header } from "@/components/Header";
 import { Title } from "@/components/Title";
 import { ButtonIcon } from "@/components/ButtonIcon";
+import { StackRoutesProps } from "@/Routes/StackRoutes";
 
-export function Product() {
 
-    const navigation = useNavigation()
+
+
+export function Product({ navigation, route }: StackRoutesProps<"product">) {
+
+
 
     return (
 
         <View style={{ flex: 1, padding: 32, paddingTop: 54 }}>
             <Header>
-                <ButtonIcon name="arrow-circle-left" onPress={() => navigation.goBack()}/>
-                <Title>Product</Title>
+                <ButtonIcon name="arrow-circle-left" onPress={() => navigation.goBack()} />
+                <Title>Product {route.params?.id}</Title>
 
             </Header>
         </View>
