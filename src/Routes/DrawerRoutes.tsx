@@ -1,55 +1,57 @@
-import { createBottomTabNavigator, BottomTabScreenProps } from "@react-navigation/drawer"
+import { createDrawerNavigator, DrawerScreenProps } from "@react-navigation/drawer"
 import { MaterialIcons } from "@expo/vector-icons"
 
 import { Product } from "@/app/Product"
 import { Home } from "@/app/Home"
 
-export type BottomRouteList = {
+export type DraweRoutesList = {
     home: undefined,
     product: undefined | {id: string}
 }
 
-export type BottomRoutesProps<T extends keyof BottomRouteList> = BottomTabScreenProps<BottomRouteList, T>
+export type DrawerRoutesProps<T extends keyof DraweRoutesList> = DrawerScreenProps<DraweRoutesList, T>
 
-const Tab = createBottomTabNavigator<BottomRouteList>()
+const Drawer = createDrawerNavigator<DraweRoutesList>()
 
 export function DrawerRoutes() {
     return (
-        <Tab.Navigator
+        <Drawer.Navigator
             initialRouteName="home"
 
         // Aqui podemos definir o header que é padrão em todas as rotas ou em apenas uma rota, se for no Tab Navigator, vai ser em todas
         screenOptions={{
-            tabBarActiveTintColor: "#2c46b1",
-            tabBarInactiveTintColor: "#444444",
-            tabBarLabelPosition: "beside-icon"
+            drawerActiveTintColor: "#2c46b1",
+            drawerInactiveTintColor: "#444444",
+            headerShown: false, 
+            
         }}
         >
-            <Tab.Screen
+            <Drawer.Screen
                 name="home"
                 component={Home}
 
                 // Se for em apenas uma rota em especifíco como aqui, vai se aplicar somente nessa rota aqui mesmo
                 options={{ 
                     headerTitle: "Inicio",
-                    tabBarLabel: "Produto",
-                    tabBarIcon: ({color, size}) => <MaterialIcons name="home" color= {color}  size={size} />
+                    drawerLabel: "Inicio",
+                    drawerIcon: ({color, size}) => <MaterialIcons name="home" color= {color}  size={size} />
                     
                 }}
                
             />
 
-            <Tab.Screen
+            <Drawer.Screen
                 name="product"
                 component={Product}
                 options={{ 
-                    headerShown: false, 
-                    tabBarLabel: "Produto",
-                    tabBarIcon: ({color, size}) => <MaterialIcons name="home" color= {color}  size={size} />
+                   
+                    drawerLabel: "Produto",
+                    drawerIcon: ({color, size}) => <MaterialIcons name="home" color= {color}  size={size} />,
+                    
                 }}
             />
 
-        </Tab.Navigator>
+        </Drawer.Navigator>
     )
 
 
